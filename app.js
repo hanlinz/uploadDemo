@@ -31,6 +31,9 @@ app.post('/file_upload', (req, res)=>{
         return false;
     }
     let des_file = __dirname + '/fileHome/' + req.files[0].originalname;
+    if(!fs.existsSync(resolvePath('./fileHome'))){
+        fs.mkdirSync(resolvePath('fileHome'))
+    }
     fs.readFile( req.files[0].path, function(err, data){
         fs.writeFile(des_file, data, function(err){
             let response = {}
